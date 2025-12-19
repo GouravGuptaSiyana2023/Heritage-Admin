@@ -46,7 +46,11 @@ export type MasterDataCategory =
   | 'report_reason'
   | 'age_group'
   | 'travel_purpose'
-  | 'relation';
+  | 'relation'
+  | 'accessibility'
+  | 'experience'
+  | 'etiquette'
+  | 'ticket_type';
 
 // Booking Types
 export interface Booking {
@@ -171,8 +175,8 @@ export interface HeritageSite {
   site_type?: string | null;
   entry_fee?: number | null;
   entry_type?: 'free' | 'paid' | null;
-  experience?: string | null;
-  accessibility?: string | null;
+  experience?: string | string[] | null; // Can be string (legacy) or array (new format)
+  accessibility?: string | string[] | null; // Can be string (legacy) or array (new format)
   location_address?: string | null;
   location_area?: string | null;
   location_city?: string | null;
@@ -195,5 +199,7 @@ export interface HeritageSite {
   cultural_etiquettes?: string[] | null;
   transport_options?: HeritageSiteTransportOption[] | null;
   nearby_attractions?: HeritageSiteAttraction[] | null;
+  photography_allowed?: string | null; // Database column: varchar - stores 'free', 'paid', or 'restricted'
+  photograph_amount?: number | null; // Database column: numeric - stores amount if photography is paid
 }
 
